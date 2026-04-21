@@ -1,4 +1,4 @@
-# Copyright 2025 qleonardolp
+# Copyright 2026 qleonardolp
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ def generate_launch_description():
     gazebo_world = PathJoinSubstitution(
         [this_package_share, 'worlds', [LaunchConfiguration('world'), '.sdf']]
     )
-    bridges = PathJoinSubstitution([this_package_share, 'config', 'ros_gz_bridge.yaml'])
+    bridges = PathJoinSubstitution([this_package_share, 'config', 'bridges_ft_sensor.yaml'])
     controllers_config = PathJoinSubstitution([this_package_share, 'config', 'controllers.yaml'])
     rviz_config = PathJoinSubstitution([this_package_share, 'config', 'rviz2.rviz'])
 
