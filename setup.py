@@ -14,7 +14,7 @@ setup(
             ['resource/' + package_name]),
         (share_path, ['package.xml']),
         (share_path + '/worlds', glob('worlds/*.sdf')),
-        (share_path + '/config', glob('config/*.yaml')),
+        (share_path + '/config', glob('config/*')),
         (share_path + '/launch', glob('launch/*launch.[pxy][yma]*')),
     ],
     install_requires=['setuptools'],
