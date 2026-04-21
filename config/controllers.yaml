@@ -20,6 +20,27 @@ ur5_controller:
     urdf_relative_path: /description/urdf/ur5.description.urdf.xacro
     visualize_reference: true
 
+bravo7_controller:
+  ros__parameters:
+    type: ros2_impedance_controller/BasicCartesianController
+    is_async: true
+    update_rate: 250
+    joints:
+      - g_joint
+      - f_joint
+      - e_joint
+      - d_joint
+      - c_joint
+      - b_joint
+    base_link: base_link
+    interaction_link: jaws_base_link
+    taskspace_mass: 0.0
+    stiffness: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # TODO: tuning
+    damping: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    urdf_package: ros2_descriptions
+    urdf_relative_path: /description/urdf/bravo7.description.urdf.xacro
+    visualize_reference: true
+
 spot_leg_controller:
   ros__parameters:
     type: ros2_impedance_controller/CartesianController
