@@ -34,12 +34,21 @@ bravo7_controller:
       - b_joint
     base_link: base_link
     interaction_link: jaws_base_link
-    taskspace_mass: 0.0
-    stiffness: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # TODO: tuning
-    damping: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]  # TODO: tuning
+    damping: [120.0, 120.0, 134.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/bravo7.description.urdf.xacro
     visualize_reference: true
+
+bravo7_jaw_controller:
+  ros__parameters:
+    type: forward_command_controller/ForwardCommandController
+    is_async: true
+    update_rate: 250
+    joints:
+      - rs2_300_joint
+      - rs2_301_joint
+    interface_name: position
 
 spot_leg_controller:
   ros__parameters:

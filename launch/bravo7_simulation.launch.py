@@ -126,11 +126,13 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster'],
     )
 
+    controllers_list = [controller_name, 'bravo7_jaw_controller']
+
     controllers_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=[
-            controller_name,
+            *controllers_list,
             '--inactive',
             '--param-file',
             controllers_config,

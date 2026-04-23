@@ -1,28 +1,14 @@
 <sdf version='1.10'>
-  <world name='waterworld'>
-    <plugin
-      name='gz::sim::systems::Physics'
-      filename='gz-sim-physics-system'>
-      <engine>
-          <filename>gz-physics-bullet-featherstone-plugin</filename>
-      </engine>
-    </plugin>
-    <physics name='bullet_physics' type='bullet'>
+  <world name='Waterworld'>
+    <physics name='default_physics' type='dart'>
       <max_step_size>0.002</max_step_size>
       <real_time_factor>1.0</real_time_factor>
       <real_time_update_rate>500</real_time_update_rate>
-      <bullet>
-        <solver>
-          <min_step_size>0.001</min_step_size>
-          <iters>75</iters>
-          <sor>1.3</sor>
-        </solver>
-        <constraints>
-            <cfm>0.00001</cfm>
-            <erp>0.2</erp>
-        </constraints>
-      </bullet>
+      <dart>
+        <collision_detector>bullet</collision_detector>
+      </dart>
     </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
     <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
     <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
     <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
