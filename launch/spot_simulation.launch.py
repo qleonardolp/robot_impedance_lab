@@ -97,6 +97,12 @@ def generate_launch_description():
         condition=IfCondition(gz_gui),
     )
 
+    gz_bridge_imu = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/spot_trunk/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'],
+    )
+
     # Get URDF via xacro
     robot_urdf = Command(
         [
@@ -127,7 +133,7 @@ def generate_launch_description():
             '--frame-id',
             'spot',
             '--child-frame-id',
-            'body_dummy',
+            'spot_root',
         ],
         condition=UnlessCondition(gz_gui),
     )
@@ -138,7 +144,7 @@ def generate_launch_description():
     gazebo_spawner = Node(
         package='ros_gz_sim',
         executable='create',
-        arguments=['-topic', '/robot_description'],
+        arguments=['-topic', '/robot_description', '-z', '0.40'],
     )
 
     broadcaster_spawner = Node(
@@ -170,6 +176,7 @@ def generate_launch_description():
         gazebosim_headless,
         gz_bridge_with_pose,
         gz_bridge_clock_only,
+        gz_bridge_imu,
         robot_state_publisher,
         static_transform,
         gazebo_spawner,
