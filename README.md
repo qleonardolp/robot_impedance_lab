@@ -1,6 +1,6 @@
 # robot_impedance_lab
 
-Virtual laboratory for [robot impedance control](https://github.com/qleonardolp/ros2_impedance_controller) assessment on Gazebo Harmonic simulations.
+Virtual laboratory for [robot impedance control](https://github.com/qleonardolp/ros2_impedance_controller) assessment in ROS 2 and Gazebo Harmonic.
 
 ## Instructions
 

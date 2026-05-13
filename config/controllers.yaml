@@ -136,8 +136,8 @@ spot_fl_control:
       - fl_knee
     base_link: spot_trunk
     interaction_link: fl_foot
-    # stiffness: [400.0, 400.0, 800.0, 0.0, 0.0, 0.0]
-    damping: [100.0, 100.0, 90.0, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 400.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 48.9897, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fl.description.urdf.xacro
     visualize_reference: true
@@ -158,8 +158,8 @@ spot_fr_control:
       - fr_knee
     base_link: spot_trunk
     interaction_link: fr_foot
-    # stiffness: [400.0, 400.0, 800.0, 0.0, 0.0, 0.0]
-    damping: [100.0, 100.0, 90.0, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 400.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 48.9897, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fr.description.urdf.xacro
     visualize_reference: true
@@ -180,8 +180,8 @@ spot_hl_control:
       - hl_knee
     base_link: spot_trunk
     interaction_link: hl_foot
-    # stiffness: [400.0, 400.0, 800.0, 0.0, 0.0, 0.0]
-    damping: [100.0, 100.0, 90.0, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 400.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 48.9897, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hl.description.urdf.xacro
     visualize_reference: true
@@ -202,8 +202,8 @@ spot_hr_control:
       - hr_knee
     base_link: spot_trunk
     interaction_link: hr_foot
-    # stiffness: [400.0, 400.0, 800.0, 0.0, 0.0, 0.0]
-    damping: [100.0, 100.0, 90.0, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 400.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 48.9897, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hr.description.urdf.xacro
     visualize_reference: true
