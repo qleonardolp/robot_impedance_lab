@@ -33,56 +33,20 @@ def generate_launch_description():
             + ' starts gazebo in server mode using Rviz2 as graphical interface.',
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'robot',
-            default_value='ur5',
-            description='Robot model. Options: ur5, spot, spot_leg, hyl',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'controller',
-            default_value='ur5_controller',
-            description='Controller name in controllers.yaml',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'world',
-            default_value='benchmark',
-            description='Gazebo world. Check worlds directory.',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'is_fixed',
-            default_value='true',
-            description='Set the URDF in fixed (test stand) configuration.',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'bench_setup',
-            default_value='',
-            description='Set URDF test bench configuration.',
-        )
-    )
+
+    # Leg controllers
+    spot_controllers = [
+        'spot_fl_control',
+    ]
 
     # Arguments variables
     gz_gui = LaunchConfiguration('gz_gui')
-    robot_model = LaunchConfiguration('robot')
-    controller_name = LaunchConfiguration('controller')
+    package_share = FindPackageShare('robot_impedance_lab')
+    gazebo_world = PathJoinSubstitution([package_share, 'worlds', 'empty.sdf'])
+    controllers_config = PathJoinSubstitution([package_share, 'config', 'controllers.yaml'])
+    rviz_config = PathJoinSubstitution([package_share, 'config', 'spot_rviz.rviz'])
 
-    this_package_share = FindPackageShare('robot_impedance_lab')
-    gazebo_world = PathJoinSubstitution(
-        [this_package_share, 'worlds', [LaunchConfiguration('world'), '.sdf']]
-    )
-    bridges = PathJoinSubstitution([this_package_share, 'config', 'bridges_ft_sensor.yaml'])
-    controllers_config = PathJoinSubstitution([this_package_share, 'config', 'controllers.yaml'])
-    rviz_config = PathJoinSubstitution([this_package_share, 'config', 'rviz2.rviz'])
-
-    # gazebo
+    # Gazebo launch
     gazebosim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [FindPackageShare('ros_gz_sim'), '/launch/gz_sim.launch.py']
@@ -98,18 +62,19 @@ def generate_launch_description():
             [FindPackageShare('ros_gz_sim'), '/launch/gz_sim.launch.py']
         ),
         launch_arguments={
-            'gz_args': ['-s -r -v0 ', gazebo_world],
+            'gz_args': ['-r -v0 -s --headless-rendering ', gazebo_world],
             'on_exit_shutdown': 'true',
         }.items(),
         condition=UnlessCondition(gz_gui),
     )
 
     # ROS-Gazebo bridges
-    gazebo_bridge = Node(
+    gz_bridge_clock_only = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        parameters=[{'config_file': bridges}],
-        output='screen',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        remappings=[('/clock', '/clock')],
+        condition=IfCondition(gz_gui),
     )
 
     # Get URDF via xacro
@@ -121,13 +86,10 @@ def generate_launch_description():
                 [
                     FindPackageShare('ros2_descriptions'),
                     'description',
-                    [robot_model, '.urdf.xacro'],
+                    'spot_leg.urdf.xacro',
                 ]
             ),
-            ' fixed:=',
-            LaunchConfiguration('is_fixed'),
-            ' setup:=',
-            LaunchConfiguration('bench_setup'),
+            ' setup:=walker',
         ]
     )
 
@@ -144,11 +106,7 @@ def generate_launch_description():
     gazebo_spawner = Node(
         package='ros_gz_sim',
         executable='create',
-        output='log',
-        arguments=[
-            '-topic',
-            '/robot_description',
-        ],
+        arguments=['-topic', '/robot_description'],
     )
 
     broadcaster_spawner = Node(
@@ -157,12 +115,12 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster'],
     )
 
-    controller_spawner = Node(
+    controllers_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=[
-            controller_name,
-            '--inactive',
+            *spot_controllers,
+            '--activate-as-group',
             '--param-file',
             controllers_config,
         ],
@@ -171,7 +129,6 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        output='log',
         arguments=['-d', rviz_config],
         condition=UnlessCondition(gz_gui),
     )
@@ -179,11 +136,11 @@ def generate_launch_description():
     nodes = [
         gazebosim,
         gazebosim_headless,
-        gazebo_bridge,
+        gz_bridge_clock_only,
         robot_state_publisher,
         gazebo_spawner,
         broadcaster_spawner,
-        controller_spawner,
+        controllers_spawner,
         rviz,
     ]
 
