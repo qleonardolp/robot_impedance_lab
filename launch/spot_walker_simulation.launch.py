@@ -17,7 +17,7 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
-from launch_ros.actions import Node
+from launch_ros.actions import LifecycleNode, Node
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -44,6 +44,7 @@ def generate_launch_description():
     package_share = FindPackageShare('robot_impedance_lab')
     gazebo_world = PathJoinSubstitution([package_share, 'worlds', 'empty.sdf'])
     controllers_config = PathJoinSubstitution([package_share, 'config', 'controllers.yaml'])
+    generator_config = PathJoinSubstitution([package_share, 'config', 'generators.yaml'])
     rviz_config = PathJoinSubstitution([package_share, 'config', 'spot_rviz.rviz'])
 
     # Gazebo launch
@@ -125,6 +126,16 @@ def generate_launch_description():
             controllers_config,
         ],
     )
+
+    reference_generator = LifecycleNode(
+        package='robot_impedance_analyzer',
+        executable='kinematic_reference',
+        name='walker_reference',
+        namespace='',
+        autostart=True,
+        parameters=[generator_config],
+        )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -141,6 +152,7 @@ def generate_launch_description():
         gazebo_spawner,
         broadcaster_spawner,
         controllers_spawner,
+        reference_generator,
         rviz,
     ]
 
