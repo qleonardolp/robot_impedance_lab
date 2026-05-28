@@ -45,7 +45,7 @@ def generate_launch_description():
     gazebo_world = PathJoinSubstitution([package_share, 'worlds', 'empty.sdf'])
     controllers_config = PathJoinSubstitution([package_share, 'config', 'controllers.yaml'])
     generator_config = PathJoinSubstitution([package_share, 'config', 'generators.yaml'])
-    rviz_config = PathJoinSubstitution([package_share, 'config', 'spot_rviz.rviz'])
+    rviz_config = PathJoinSubstitution([package_share, 'config', 'spot_walker.rviz'])
 
     # Gazebo launch
     gazebosim = IncludeLaunchDescription(
@@ -75,7 +75,6 @@ def generate_launch_description():
         executable='parameter_bridge',
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         remappings=[('/clock', '/clock')],
-        condition=IfCondition(gz_gui),
     )
 
     # Get URDF via xacro
