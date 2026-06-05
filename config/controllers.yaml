@@ -34,8 +34,8 @@ bravo7_controller:
       - b_joint
     base_link: base_link
     interaction_link: jaws_base_link
-    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]  # TODO: tuning
-    damping: [120.0, 120.0, 134.0, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 400.0, 400.0, 20.0, 20.0, 20.0]  # TODO: tuning
+    damping: [120.0, 120.0, 134.0, 4.0, 4.0, 4.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/bravo7.description.urdf.xacro
     visualize_reference: true
@@ -116,7 +116,7 @@ ur5_mpc:
     base_link: base_link
     interaction_link: ee_link
     ft_sensor_topic: end_effector_ft_sensor
-    stiffness: [490.0, 810.0, 810.0, 120.0, 225.0, 180.0]
+    stiffness: [490.0, 810.0, 810.0, 120.0, 225.0, 180.0]  #TODO: tuning
     damping: [140.0, 180.0, 180.0, 18.6226, 25.5, 22.8079]
     urdf_relative_path: /description/urdf/ur5.description.urdf.xacro
     urdf_package: ros2_descriptions

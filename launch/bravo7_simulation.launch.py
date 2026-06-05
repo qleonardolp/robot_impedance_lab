@@ -86,7 +86,6 @@ def generate_launch_description():
         executable='parameter_bridge',
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         remappings=[('/clock', '/clock')],
-        condition=IfCondition(gz_gui),
     )
 
     # Get URDF via xacro
