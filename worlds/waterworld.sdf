@@ -184,4 +184,9 @@
       </spot>
     </light>
   </world>
+  <include>
+    <uri>
+      https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coast Water
+    </uri>
+  </include>
 </sdf>
