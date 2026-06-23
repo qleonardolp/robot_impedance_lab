@@ -9,3 +9,15 @@ walker_reference:
     period: 0.20
     rate: 250
     axis: 'z' # doesn't matter for CPG
+
+benchmark_reference:
+  ros__parameters:
+    topic_name: spot_fl_control/reference
+    signal_type: cpg-trajectory
+    initial_pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
+    cpg_x_offset: 0.324
+    cpg_robot_height: 0.12
+    cpg_length: 0.32
+    period: 1.0
+    rate: 500
+    axis: 'z' # doesn't matter for CPG

@@ -6,9 +6,6 @@
       <real_time_factor>1.0</real_time_factor>
       <real_time_update_rate>500</real_time_update_rate>
       <dart>
-        <!--solver>
-          <solver_type>pgs</solver_type>
-        </solver-->
         <collision_detector>bullet</collision_detector>
       </dart>
     </physics>
@@ -28,7 +25,7 @@
     <model name='ground_plane'>
       <static>true</static>
       <link name='link'>
-        <collision name='collision'>
+        <collision name='ground_collision'>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
@@ -43,7 +40,7 @@
             <contact/>
           </surface>
         </collision>
-        <visual name='visual'>
+        <visual name='ground_visual'>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
@@ -70,104 +67,19 @@
           </inertia>
         </inertial>
         <enable_wind>false</enable_wind>
+
+        <sensor name="ground_contact_sensor" type="contact">
+          <always_on>true</always_on>
+          <update_rate>250</update_rate>
+          <contact>
+            <collision>ground_collision</collision>
+            <topic>/ground_contact_sensor</topic>
+          </contact>
+        </sensor>
       </link>
-      <pose>0 0 0 0 0 0</pose>
       <self_collide>false</self_collide>
     </model>
-    <model name='rigid_table'>
-      <pose>0.0 2.10 0.20 0 0 0</pose>
-      <link name='rigid_table_link'>
-        <inertial>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-          <mass>1</mass>
-          <pose>0 0 0 0 0 0</pose>
-        </inertial>
-        <collision name='rigid_table_collision'>
-          <geometry>
-            <box>
-              <size>0.70 1.40 0.40</size>
-            </box>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>0.4</mu>
-                <mu2>0.4</mu2>
-              </ode>
-            </friction>
-            <bounce/>
-            <contact/>
-          </surface>
-        </collision>
-        <visual name='rigid_table_visual'>
-          <geometry>
-            <box>
-              <size>0.70 1.40 0.40</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.20 1.0 1.0 1.0</ambient>
-            <diffuse>0.20 1.0 1.0 0.80</diffuse>
-            <specular>1 1 1 1</specular>
-          </material>
-        </visual>
-        <pose>0 0 0 0 0 0</pose>
-      </link>
-      <static>true</static>
-    </model>
-    <model name='push_object'>
-      <pose>0.0 1.83 0.60 0 0 0</pose>
-      <link name='push_object_link'>
-        <inertial>
-          <inertia>
-            <ixx>0.0433332</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.0166666</iyy>
-            <iyz>0</iyz>
-            <izz>0.0333332</izz>
-          </inertia>
-          <mass>1.0</mass>
-          <pose>0 0 0 0 0 0</pose>
-        </inertial>
-        <collision name='push_object_collision'>
-          <geometry>
-            <box>
-              <size>0.20 0.60 0.40</size>
-            </box>
-          </geometry>
-          <surface>
-            <friction>
-              <ode/>
-            </friction>
-            <bounce/>
-            <contact/>
-          </surface>
-        </collision>
-        <visual name='push_object_visual'>
-          <geometry>
-            <box>
-              <size>0.20 0.60 0.40</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.80 0 0.40 1.0</ambient>
-            <diffuse>0.80 0 0.40 0.88</diffuse>
-            <specular>1 1 1 1</specular>
-          </material>
-        </visual>
-        <pose>0 0 0 0 0 0</pose>
-        <enable_wind>false</enable_wind>
-      </link>
-      <static>false</static>
-    </model>
+
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>
       <cast_shadows>false</cast_shadows>
