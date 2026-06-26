@@ -13,12 +13,21 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, EmitEvent, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
+import launch.events
+
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import (
+  Command,
+  FindExecutable,
+  LaunchConfiguration,
+  PathJoinSubstitution
+)
 from launch_ros.actions import LifecycleNode, Node
+from launch_ros.events.lifecycle import ChangeState
 from launch_ros.substitutions import FindPackageShare
+from lifecycle_msgs.msg import Transition
 
 
 def generate_launch_description():
@@ -136,6 +145,21 @@ def generate_launch_description():
         parameters=[generator_config],
         )
 
+    identification = LifecycleNode(
+        package='robot_impedance_analyzer',
+        executable='identification',
+        name='identification',
+        namespace='',
+        parameters=[generator_config],
+        )
+
+    config_identification = EmitEvent(
+        event=ChangeState(
+            lifecycle_node_matcher=launch.events.matches_action(identification),
+            transition_id=Transition.TRANSITION_CONFIGURE,
+        )
+    )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -153,6 +177,8 @@ def generate_launch_description():
         broadcaster_spawner,
         controllers_spawner,
         reference_generator,
+        identification,
+        config_identification,
         rviz,
     ]
 
