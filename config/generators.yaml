@@ -1,6 +1,6 @@
 walker_reference:
   ros__parameters:
-    topic_name: spot_fl_control/reference
+    topic_name: spot_leg_control/reference
     signal_type: cpg-trajectory
     initial_pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
     cpg_x_offset: 0.324
@@ -12,11 +12,11 @@ walker_reference:
 
 benchmark_reference:
   ros__parameters:
-    topic_name: spot_fl_control/reference
+    topic_name: spot_leg_control/reference
     signal_type: cpg-trajectory
     initial_pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
     cpg_x_offset: 0.30
-    cpg_robot_height: 0.12
+    cpg_robot_height: 0.37
     cpg_length: 0.33
     period: 1.111
     rate: 500
@@ -25,10 +25,10 @@ benchmark_reference:
 identification:
   ros__parameters:
     axis: z
-    controller_reference_topic: spot_fl_control/reference
-    controller_status_topic: spot_fl_control/status
+    controller_reference_topic: spot_leg_control/reference
+    controller_status_topic: spot_leg_control/status
     sampling_frequency: 500.0
     cutoff_frequency: 10.0
-    expected_stiffness: 600.0
-    expected_damping: 48.9897
-    expected_mass: 1.0
+    expected_stiffness: 125.0
+    expected_damping: 5.0
+    expected_mass: 0.05

@@ -45,7 +45,7 @@ def generate_launch_description():
 
     # Leg controllers
     spot_controllers = [
-        'spot_fl_control',
+        'spot_leg_control',
     ]
 
     # Configurations

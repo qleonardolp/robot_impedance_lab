@@ -35,9 +35,9 @@ ros2 control set_controller_state <controller_name> active
 ## Examples
 
 ```bash
-ros2 launch robot_impedance_lab simulation.launch.py robot:=spot_leg controller:=spot_fl_control bench_setup:=fixed gz_gui:=false
+ros2 launch robot_impedance_lab simulation.launch.py robot:=spot_leg controller:=spot_leg_control bench_setup:=fixed gz_gui:=false
 ```
 
 ```bash
-ros2 control set_controller_state spot_fl_control active
+ros2 control set_controller_state spot_leg_control active
 ```
