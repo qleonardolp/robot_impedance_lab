@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
-        - /Marker1/Status1
         - /Marker1/Topic1
       Splitter Ratio: 0.5329815149307251
     Tree Height: 685
@@ -138,10 +137,10 @@ Visualization Manager:
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Marker
-      Enabled: false
+      Enabled: true
       Name: Marker
       Namespaces:
-        {}
+        spot_leg_control: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -149,7 +148,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /spot_leg_control/reference_marker
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 244; 250; 251
@@ -211,10 +210,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.1002022996544838
+      Pitch: 0.11520230770111084
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.524137258529663
+      Yaw: 1.5741372108459473
     Saved: ~
 Window Geometry:
   Displays:
