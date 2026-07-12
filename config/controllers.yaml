@@ -22,7 +22,7 @@ ur5_controller:
 
 bravo7_controller:
   ros__parameters:
-    type: ros2_impedance_controller/NonlinearCartesianController  # MPCIController
+    type: ros2_impedance_controller/BasicCartesianController  # NonlinearCartesianController
     # is_async: true
     # update_rate: 250
     joints:
@@ -34,13 +34,13 @@ bravo7_controller:
       - b_joint
     base_link: base_link
     interaction_link: jaws_base_link
-    stiffness: [400.0, 400.0, 400.0, 50.0, 80.0, 80.0]
-    damping: [40.0, 40.0, 40.0, 14.0, 19.0, 19.0]
+    stiffness: [400.0, 400.0, 500.0, 50.0, 80.0, 80.0]
+    damping: [0.0, 91.0, 98.0, 14.0, 19.0, 19.0]  # m_xx = 5.2
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/bravo7.description.urdf.xacro
     visualize_reference: true
-    spring_force_limit: 120.0  # from the 'dynamic full-extension lift'
     zspace_window: 20
+    # spring_force_limit: 120.0  # from the 'dynamic full-extension lift'
     # torque_max: 100.0  # On datasheet is 110 N.m for the base joint
     # slew_limit: 0.9
     # timestep: 0.004
@@ -58,7 +58,7 @@ bravo7_jaw_controller:
 
 spot_leg_control:
   ros__parameters:
-    type: ros2_impedance_controller/BasicCartesianController
+    type: ros2_impedance_controller/NonlinearCartesianController
     joints:
       - fl_hipx
       - fl_hipy
@@ -68,7 +68,8 @@ spot_leg_control:
     stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
     damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
     zspace_window: 20
-    # taskspace_mass: 0.0
+    spring_force_limit: 120.0
+    # taskspace_mass: 0.0  # m = 0.1
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_leg.description.urdf.xacro
     visualize_reference: true
