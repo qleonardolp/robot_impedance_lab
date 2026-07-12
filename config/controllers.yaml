@@ -22,9 +22,9 @@ ur5_controller:
 
 bravo7_controller:
   ros__parameters:
-    type: ros2_impedance_controller/MPCIController  # NonlinearCartesianController
-    is_async: true
-    update_rate: 250
+    type: ros2_impedance_controller/NonlinearCartesianController  # MPCIController
+    # is_async: true
+    # update_rate: 250
     joints:
       - g_joint
       - f_joint
@@ -39,11 +39,12 @@ bravo7_controller:
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/bravo7.description.urdf.xacro
     visualize_reference: true
-    # spring_force_limit: 100.0  # from the 'dynamic full-extension lift'
-    torque_max: 100.0  # On datasheet is 110 N.m for the base joint
-    slew_limit: 0.9
-    timestep: 0.004
-    horizon: 8
+    spring_force_limit: 120.0  # from the 'dynamic full-extension lift'
+    zspace_window: 20
+    # torque_max: 100.0  # On datasheet is 110 N.m for the base joint
+    # slew_limit: 0.9
+    # timestep: 0.004
+    # horizon: 8
 
 bravo7_jaw_controller:
   ros__parameters:
@@ -66,6 +67,7 @@ spot_leg_control:
     interaction_link: fl_foot
     stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
     damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
+    zspace_window: 20
     # taskspace_mass: 0.0
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_leg.description.urdf.xacro

@@ -10,11 +10,21 @@ walker_reference:
     period: 0.20
     rate: 500
 
+bravo7_reference:
+  ros__parameters:
+    topic_name: bravo7_controller/reference
+    signal_type: PRBS
+    axis: 'x'
+    amplitude: 0.15
+    initial_pose: [0.55, 0.0, 0.32, 0.0, 0.0, 0.0, 1.0]
+    rate: 500
+
 benchmark_reference:
   ros__parameters:
     topic_name: spot_leg_control/reference
-    signal_type: step-sequence  # cpg-trajectory
+    signal_type: PRBS  # cpg-trajectory | step-sequence
     axis: 'z' # doesn't matter for CPG
+    amplitude: 0.15
     initial_pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
     cpg_x_offset: 0.30
     cpg_robot_height: 0.5
