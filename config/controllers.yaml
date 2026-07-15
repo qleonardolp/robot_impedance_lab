@@ -64,8 +64,8 @@ spot_leg_control:
       - fl_knee
     base_link: leg_support
     interaction_link: fl_foot
-    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
     zspace_window: 20
     spring_force_limit: 120.0
     # taskspace_mass: 0.0  # m = 0.1
@@ -117,8 +117,8 @@ spot_fl_control:
       - fl_knee
     base_link: spot_trunk
     interaction_link: fl_foot
-    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fl.description.urdf.xacro
     visualize_reference: true
@@ -137,8 +137,8 @@ spot_fr_control:
       - fr_knee
     base_link: spot_trunk
     interaction_link: fr_foot
-    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fr.description.urdf.xacro
     visualize_reference: true
@@ -157,8 +157,8 @@ spot_hl_control:
       - hl_knee
     base_link: spot_trunk
     interaction_link: hl_foot
-    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hl.description.urdf.xacro
     visualize_reference: true
@@ -177,8 +177,8 @@ spot_hr_control:
       - hr_knee
     base_link: spot_trunk
     interaction_link: hr_foot
-    stiffness: [400.0, 400.0, 400.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 32.19, 32.19, 0.0, 0.0, 0.0]
+    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
+    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hr.description.urdf.xacro
     visualize_reference: true
