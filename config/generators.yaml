@@ -13,18 +13,19 @@ walker_reference:
 bravo7_reference:
   ros__parameters:
     topic_name: bravo7_controller/reference
-    signal_type: PRBS
+    signal_type: sinewave
     axis: 'x'
-    amplitude: 0.25
-    initial_pose: [0.45, 0.0, 0.20, 0.0, 0.0, 0.0, 1.0]
-    rate: 500
+    amplitude: 0.10
+    period: 5.0
+    initial_pose: [0.55, 0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+    rate: 1000
 
 benchmark_reference:
   ros__parameters:
     topic_name: spot_leg_control/reference
     signal_type: sinewave  # cpg-trajectory | step-sequence
     axis: 'x' # doesn't matter for CPG
-    amplitude: 0.10
+    amplitude: 0.20
     initial_pose: [0.324, 0.210, -0.40, 0.0, 0.0, 0.0, 1.0]
     cpg_x_offset: 0.30
     cpg_robot_height: 0.5

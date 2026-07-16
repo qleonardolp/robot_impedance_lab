@@ -34,8 +34,8 @@ bravo7_controller:
       - b_joint
     base_link: base_link
     interaction_link: jaws_base_link
-    stiffness: [400.0, 400.0, 500.0, 50.0, 80.0, 80.0]
-    damping: [0.0, 91.0, 98.0, 14.0, 19.0, 19.0]  # m_xx = 5.2
+    stiffness: [500.0, 500.0, 500.0, 50.0, 80.0, 80.0]
+    damping: [0.0, 98.0, 98.0, 14.0, 19.0, 19.0]  # m_xx = 4.35
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/bravo7.description.urdf.xacro
     visualize_reference: true
