@@ -23,10 +23,10 @@ bravo7_reference:
 benchmark_reference:
   ros__parameters:
     topic_name: spot_leg_control/reference
-    signal_type: sinewave  # cpg-trajectory | step-sequence
-    axis: 'x' # doesn't matter for CPG
-    amplitude: 0.20
-    initial_pose: [0.324, 0.210, -0.40, 0.0, 0.0, 0.0, 1.0]
+    signal_type: step  # cpg-trajectory | step-sequence
+    axis: 'z' # doesn't matter for CPG
+    amplitude: 0.001
+    initial_pose: [0.324, 0.210, -0.65, 0.0, 0.0, 0.0, 1.0]
     cpg_x_offset: 0.30
     cpg_robot_height: 0.5
     cpg_length: 0.33

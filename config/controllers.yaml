@@ -64,10 +64,10 @@ spot_leg_control:
       - fl_knee
     base_link: leg_support
     interaction_link: fl_foot
-    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
-    zspace_window: 20
-    spring_force_limit: 120.0
+    stiffness: [400.0, 500.0, 980.0, 0.0, 0.0, 0.0]
+    damping: [32.19, 40.0, 80.0, 0.0, 0.0, 0.0]
+    zspace_window: 8
+    spring_force_limit: 200.0
     # taskspace_mass: 0.0  # m = 0.1
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_leg.description.urdf.xacro
