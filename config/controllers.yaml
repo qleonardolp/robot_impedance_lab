@@ -108,7 +108,7 @@ mpc_controller:
 
 spot_fl_control:
   ros__parameters:
-    type: ros2_impedance_controller/MPCIController
+    type: ros2_impedance_controller/BasicCartesianController
     is_async: true
     update_rate: 500
     joints:
@@ -117,18 +117,19 @@ spot_fl_control:
       - fl_knee
     base_link: spot_trunk
     interaction_link: fl_foot
-    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
+    stiffness: [500.0, 500.0, 900.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 67.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fl.description.urdf.xacro
     visualize_reference: true
-    torque_max: 140.0
-    slew_limit: 0.9
-    horizon: 10
+    gravity_compensation: false
+    # torque_max: 140.0
+    # slew_limit: 0.9
+    # horizon: 10
 
 spot_fr_control:
   ros__parameters:
-    type: ros2_impedance_controller/MPCIController
+    type: ros2_impedance_controller/BasicCartesianController
     is_async: true
     update_rate: 500
     joints:
@@ -137,18 +138,19 @@ spot_fr_control:
       - fr_knee
     base_link: spot_trunk
     interaction_link: fr_foot
-    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
+    stiffness: [500.0, 500.0, 900.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 67.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fr.description.urdf.xacro
     visualize_reference: true
-    torque_max: 140.0
-    slew_limit: 0.9
-    horizon: 10
+    gravity_compensation: false
+    # torque_max: 140.0
+    # slew_limit: 0.9
+    # horizon: 10
 
 spot_hl_control:
   ros__parameters:
-    type: ros2_impedance_controller/MPCIController
+    type: ros2_impedance_controller/BasicCartesianController
     is_async: true
     update_rate: 500
     joints:
@@ -157,18 +159,19 @@ spot_hl_control:
       - hl_knee
     base_link: spot_trunk
     interaction_link: hl_foot
-    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
+    stiffness: [500.0, 500.0, 900.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 67.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hl.description.urdf.xacro
     visualize_reference: true
-    torque_max: 140.0
-    slew_limit: 0.9
-    horizon: 10
+    gravity_compensation: false
+    # torque_max: 140.0
+    # slew_limit: 0.9
+    # horizon: 10
 
 spot_hr_control:
   ros__parameters:
-    type: ros2_impedance_controller/MPCIController
+    type: ros2_impedance_controller/BasicCartesianController
     is_async: true
     update_rate: 500
     joints:
@@ -177,11 +180,12 @@ spot_hr_control:
       - hr_knee
     base_link: spot_trunk
     interaction_link: hr_foot
-    stiffness: [400.0, 500.0, 600.0, 0.0, 0.0, 0.0]
-    damping: [32.19, 40.0, 43.81, 0.0, 0.0, 0.0]
+    stiffness: [500.0, 500.0, 900.0, 0.0, 0.0, 0.0]
+    damping: [40.0, 40.0, 67.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hr.description.urdf.xacro
     visualize_reference: true
-    torque_max: 140.0
-    slew_limit: 0.9
-    horizon: 10
+    gravity_compensation: false
+    # torque_max: 140.0
+    # slew_limit: 0.9
+    # horizon: 10
