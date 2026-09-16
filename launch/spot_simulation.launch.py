@@ -17,7 +17,7 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
-from launch_ros.actions import Node
+from launch_ros.actions import LifecycleNode, Node
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -57,6 +57,7 @@ def generate_launch_description():
     )
     bridges = PathJoinSubstitution([package_share, 'config', 'bridges_spot.yaml'])
     controllers_config = PathJoinSubstitution([package_share, 'config', 'controllers.yaml'])
+    generator_config = PathJoinSubstitution([package_share, 'config', 'generators.yaml'])
     rviz_config = PathJoinSubstitution([package_share, 'config', 'spot_rviz.rviz'])
 
     # Gazebo launch
@@ -163,6 +164,16 @@ def generate_launch_description():
             controllers_config,
         ],
     )
+
+    quadruped_control = LifecycleNode(
+        package='robot_impedance_analyzer',
+        executable='quadruped_control',
+        name='quadruped_control',
+        namespace='',
+        autostart=True,
+        parameters=[generator_config],
+    )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -182,6 +193,7 @@ def generate_launch_description():
         gazebo_spawner,
         broadcaster_spawner,
         controllers_spawner,
+        quadruped_control,
         rviz,
     ]
 
