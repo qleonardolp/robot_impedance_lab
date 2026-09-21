@@ -13,8 +13,9 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler
 from launch.conditions import IfCondition, UnlessCondition
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import LifecycleNode, Node
@@ -182,6 +183,13 @@ def generate_launch_description():
         condition=UnlessCondition(gz_gui),
     )
 
+    launch_quadruped_control = RegisterEventHandler(
+      event_handler=OnProcessExit(
+        target_action=controllers_spawner,
+        on_exit=[quadruped_control],
+      )
+    )
+
     nodes = [
         gazebosim,
         gazebosim_headless,
@@ -193,7 +201,7 @@ def generate_launch_description():
         gazebo_spawner,
         broadcaster_spawner,
         controllers_spawner,
-        quadruped_control,
+        launch_quadruped_control,
         rviz,
     ]
 
