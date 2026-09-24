@@ -70,11 +70,11 @@ quadruped_control:
       spot_hl_control/reference,
       spot_hr_control/reference
     ]
-    body_height: -0.12
-    fl_offset: [0.330, 0.28, 0.350]
-    fr_offset: [0.330,-0.28, 0.350]
-    rl_offset: [-0.36, 0.28, 0.350]
-    rr_offset: [-0.36,-0.28, 0.350]
-    half_stroke_length: 0.20
-    desired_velocity: 0.7  # max: 1.6 m/s
-    rate: 250
+    body_height: -0.02
+    fl_offset: [0.39, 0.244, 0.350]
+    fr_offset: [0.39,-0.244, 0.350]
+    rl_offset: [-0.31, 0.244, 0.350]
+    rr_offset: [-0.31,-0.244, 0.350]
+    half_stroke_length: 0.24  # 0.125
+    desired_velocity: 2.0  # max: 1.6 m/s
+    rate: 500

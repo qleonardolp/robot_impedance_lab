@@ -117,12 +117,13 @@ spot_fl_control:
       - fl_knee
     base_link: spot_trunk
     interaction_link: fl_foot
-    stiffness: [700.0, 700.0, 1000.0, 0.0, 0.0, 0.0]
-    damping: [40.0, 40.0, 50.0, 0.0, 0.0, 0.0]
+    stiffness: [3500.0, 3500.0, 4500.0, 0.0, 0.0, 0.0]
+    damping: [90.0, 80.0, 90.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fl.description.urdf.xacro
     visualize_reference: true
     gravity_compensation: false
+    zspace_window: 16
     # torque_max: 140.0
     # slew_limit: 0.9
     # horizon: 10
@@ -138,12 +139,13 @@ spot_fr_control:
       - fr_knee
     base_link: spot_trunk
     interaction_link: fr_foot
-    stiffness: [700.0, 700.0, 1000.0, 0.0, 0.0, 0.0]
-    damping: [40.0, 40.0, 50.0, 0.0, 0.0, 0.0]
+    stiffness: [3500.0, 3500.0, 4500.0, 0.0, 0.0, 0.0]
+    damping: [90.0, 80.0, 90.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_fr.description.urdf.xacro
     visualize_reference: true
     gravity_compensation: false
+    zspace_window: 16
     # torque_max: 140.0
     # slew_limit: 0.9
     # horizon: 10
@@ -159,12 +161,13 @@ spot_hl_control:
       - hl_knee
     base_link: spot_trunk
     interaction_link: hl_foot
-    stiffness: [700.0, 700.0, 1000.0, 0.0, 0.0, 0.0]
-    damping: [40.0, 40.0, 50.0, 0.0, 0.0, 0.0]
+    stiffness: [3500.0, 3500.0, 4500.0, 0.0, 0.0, 0.0]
+    damping: [90.0, 80.0, 90.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hl.description.urdf.xacro
     visualize_reference: true
     gravity_compensation: false
+    zspace_window: 16
     # torque_max: 140.0
     # slew_limit: 0.9
     # horizon: 10
@@ -180,12 +183,13 @@ spot_hr_control:
       - hr_knee
     base_link: spot_trunk
     interaction_link: hr_foot
-    stiffness: [700.0, 700.0, 1000.0, 0.0, 0.0, 0.0]
-    damping: [40.0, 40.0, 50.0, 0.0, 0.0, 0.0]
+    stiffness: [3500.0, 3500.0, 4500.0, 0.0, 0.0, 0.0]
+    damping: [90.0, 80.0, 90.0, 0.0, 0.0, 0.0]
     urdf_package: ros2_descriptions
     urdf_relative_path: /description/urdf/spot_hr.description.urdf.xacro
     visualize_reference: true
     gravity_compensation: false
+    zspace_window: 16
     # torque_max: 140.0
     # slew_limit: 0.9
     # horizon: 10
