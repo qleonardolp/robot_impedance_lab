@@ -13,14 +13,32 @@ walker_reference:
 bravo7_reference:
   ros__parameters:
     topic_name: bravo7_controller/reference
-    signal_type: chirp
-    chirp_final_frequency: 20.0
-    chirp_time: 10.0
+    signal_type: step-sequence
     axis: 'x'
-    amplitude: 0.05
-    period: 5.0
     initial_pose: [0.55, 0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
     rate: 1000
+    steps:
+      - forward
+      - up
+      - left
+      - down
+      - backward
+    steps_pose:
+      forward:
+        pose: [0.70, 0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+        time: 7.0
+      up:
+        pose: [0.70, 0.15, 0.28, 0.0, 0.0, 0.0, 1.0]
+        time: 10.0
+      left:
+        pose: [0.70, -0.15, 0.28, 0.0, 0.0, 0.0, 1.0]
+        time: 12.0
+      down:
+        pose: [0.70, -0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+        time: 16.0
+      backward:
+        pose: [0.55, -0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+        time: 20.0
 
 benchmark_reference:
   ros__parameters:
