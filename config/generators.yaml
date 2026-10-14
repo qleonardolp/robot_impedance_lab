@@ -1,0 +1,98 @@
+walker_reference:
+  ros__parameters:
+    topic_name: spot_leg_control/reference
+    signal_type: cpg-trajectory
+    axis: 'z' # doesn't matter for CPG
+    initial_pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
+    cpg_x_offset: 0.324
+    cpg_robot_height: 0.37
+    cpg_length: 0.93
+    period: 0.20
+    rate: 500
+
+bravo7_reference:
+  ros__parameters:
+    topic_name: bravo7_controller/reference
+    signal_type: step-sequence
+    axis: 'x'
+    initial_pose: [0.55, 0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+    rate: 1000
+    steps:
+      - forward
+      - up
+      - left
+      - down
+      - backward
+    steps_pose:
+      forward:
+        pose: [0.70, 0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+        time: 7.0
+      up:
+        pose: [0.70, 0.15, 0.28, 0.0, 0.0, 0.0, 1.0]
+        time: 10.0
+      left:
+        pose: [0.70, -0.15, 0.28, 0.0, 0.0, 0.0, 1.0]
+        time: 12.0
+      down:
+        pose: [0.70, -0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+        time: 16.0
+      backward:
+        pose: [0.55, -0.15, 0.15, 0.0, 0.0, 0.0, 1.0]
+        time: 20.0
+
+benchmark_reference:
+  ros__parameters:
+    topic_name: spot_leg_control/reference
+    signal_type: chirp  # cpg-trajectory | step-sequence
+    chirp_final_frequency: 20.0
+    chirp_time: 10.0
+    axis: 'x' # doesn't matter for CPG
+    amplitude: 0.05
+    initial_pose: [0.324, 0.210, -0.40, 0.0, 0.0, 0.0, 1.0]
+    cpg_x_offset: 0.30
+    cpg_robot_height: 0.5
+    cpg_length: 0.33
+    period: 2.0
+    rate: 1000
+    steps:
+      - begin
+      - step_down
+      - step_up
+    steps_pose:
+      begin:
+        pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
+        time: 0.0
+      step_down:
+        pose: [0.324, 0.210, -0.50, 0.0, 0.0, 0.0, 1.0]
+        time: 15.0
+      step_up:
+        pose: [0.324, 0.210, -0.35, 0.0, 0.0, 0.0, 1.0]
+        time: 20.0
+
+identification:
+  ros__parameters:
+    axis: z
+    controller_reference_topic: spot_leg_control/reference
+    controller_status_topic: spot_leg_control/status
+    sampling_frequency: 500.0
+    cutoff_frequency: 20.0
+    expected_stiffness: 400.0
+    expected_damping: 32.19
+    expected_mass: 0.648
+
+quadruped_control:
+  ros__parameters:
+    control_topics: [
+      spot_fl_control/reference,
+      spot_fr_control/reference,
+      spot_hl_control/reference,
+      spot_hr_control/reference
+    ]
+    body_height: -0.02
+    fl_offset: [0.39, 0.244, 0.350]
+    fr_offset: [0.39,-0.244, 0.350]
+    rl_offset: [-0.31, 0.244, 0.350]
+    rr_offset: [-0.31,-0.244, 0.350]
+    half_stroke_length: 0.24  # 0.125
+    desired_velocity: 2.0  # max: 1.6 m/s
+    rate: 500

@@ -56,9 +56,10 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            'is_fixed',
-            default_value='true',
-            description='Set the URDF in fixed (test stand) configuration.',
+            'bench_setup',
+            default_value='fixed',
+            description='Set URDF test bench configuration.'
+            + ' Available options: fixed, vertical, walker',
         )
     )
 
@@ -117,8 +118,8 @@ def generate_launch_description():
                     [robot_model, '.urdf.xacro'],
                 ]
             ),
-            ' fixed:=',
-            LaunchConfiguration('is_fixed'),
+            ' setup:=',
+            LaunchConfiguration('bench_setup'),
         ]
     )
 

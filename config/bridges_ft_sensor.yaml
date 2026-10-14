@@ -11,3 +11,10 @@
   subscriber_queue: 5       # Default 10
   publisher_queue: 6        # Default 10
   direction: GZ_TO_ROS
+- ros_topic_name: "/ground_contact_sensor"
+  gz_topic_name: "/ground_contact_sensor"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "gz.msgs.Contacts"
+  subscriber_queue: 5
+  publisher_queue: 5
+  direction: GZ_TO_ROS

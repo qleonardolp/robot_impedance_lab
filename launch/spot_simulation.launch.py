@@ -13,11 +13,12 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler
 from launch.conditions import IfCondition, UnlessCondition
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
-from launch_ros.actions import Node
+from launch_ros.actions import LifecycleNode, Node
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -36,7 +37,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'world',
-            default_value='legged_benchmark',
+            default_value='quadruped_benchmark',
             description='Gazebo world. See worlds directory.',
         )
     )
@@ -57,6 +58,7 @@ def generate_launch_description():
     )
     bridges = PathJoinSubstitution([package_share, 'config', 'bridges_spot.yaml'])
     controllers_config = PathJoinSubstitution([package_share, 'config', 'controllers.yaml'])
+    generator_config = PathJoinSubstitution([package_share, 'config', 'generators.yaml'])
     rviz_config = PathJoinSubstitution([package_share, 'config', 'spot_rviz.rviz'])
 
     # Gazebo launch
@@ -75,7 +77,7 @@ def generate_launch_description():
             [FindPackageShare('ros_gz_sim'), '/launch/gz_sim.launch.py']
         ),
         launch_arguments={
-            'gz_args': ['-s -r -v0 ', gazebo_world],
+            'gz_args': ['-r -v0 -s --headless-rendering ', gazebo_world],
             'on_exit_shutdown': 'true',
         }.items(),
         condition=UnlessCondition(gz_gui),
@@ -95,6 +97,12 @@ def generate_launch_description():
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         remappings=[('/clock', '/clock')],
         condition=IfCondition(gz_gui),
+    )
+
+    gz_bridge_imu = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/spot_trunk/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'],
     )
 
     # Get URDF via xacro
@@ -127,7 +135,7 @@ def generate_launch_description():
             '--frame-id',
             'spot',
             '--child-frame-id',
-            'body_dummy',
+            'spot_root',
         ],
         condition=UnlessCondition(gz_gui),
     )
@@ -138,7 +146,7 @@ def generate_launch_description():
     gazebo_spawner = Node(
         package='ros_gz_sim',
         executable='create',
-        arguments=['-topic', '/robot_description'],
+        arguments=['-topic', '/robot_description', '-z', '0.40'],
     )
 
     broadcaster_spawner = Node(
@@ -157,6 +165,16 @@ def generate_launch_description():
             controllers_config,
         ],
     )
+
+    quadruped_control = LifecycleNode(
+        package='robot_impedance_analyzer',
+        executable='quadruped_control',
+        name='quadruped_control',
+        namespace='',
+        autostart=True,
+        parameters=[generator_config],
+    )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -165,16 +183,25 @@ def generate_launch_description():
         condition=UnlessCondition(gz_gui),
     )
 
+    launch_quadruped_control = RegisterEventHandler(
+      event_handler=OnProcessExit(
+        target_action=controllers_spawner,
+        on_exit=[quadruped_control],
+      )
+    )
+
     nodes = [
         gazebosim,
         gazebosim_headless,
         gz_bridge_with_pose,
         gz_bridge_clock_only,
+        gz_bridge_imu,
         robot_state_publisher,
         static_transform,
         gazebo_spawner,
         broadcaster_spawner,
         controllers_spawner,
+        launch_quadruped_control,
         rviz,
     ]
 
