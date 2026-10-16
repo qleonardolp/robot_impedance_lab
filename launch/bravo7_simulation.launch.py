@@ -117,7 +117,7 @@ def generate_launch_description():
     gazebo_spawner = Node(
         package='ros_gz_sim',
         executable='create',
-        arguments=['-topic', '/robot_description'],
+        arguments=['-topic', '/robot_description', '-z', '-25.2'],
     )
 
     broadcaster_spawner = Node(
