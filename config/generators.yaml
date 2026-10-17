@@ -93,6 +93,6 @@ quadruped_control:
     fr_offset: [0.39,-0.244, 0.350]
     rl_offset: [-0.31, 0.244, 0.350]
     rr_offset: [-0.31,-0.244, 0.350]
-    half_stroke_length: 0.24  # 0.125
-    desired_velocity: 2.0  # max: 1.6 m/s
+    half_stroke_length: 0.13  # 0.125
+    desired_velocity: 1.0  # max: 1.6 m/s
     rate: 500
